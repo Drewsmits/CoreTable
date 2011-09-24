@@ -6,14 +6,198 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DB51D71A142E4DE1009C0A1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51D719142E4DE1009C0A1C /* Foundation.framework */; };
+		DB51D728142E4DE1009C0A1C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51D727142E4DE1009C0A1C /* SenTestingKit.framework */; };
+		DB51D72A142E4DE1009C0A1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51D729142E4DE1009C0A1C /* UIKit.framework */; };
+		DB51D72B142E4DE1009C0A1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51D719142E4DE1009C0A1C /* Foundation.framework */; };
+		DB51D72E142E4DE1009C0A1C /* libCoreTable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51D716142E4DE1009C0A1C /* libCoreTable.a */; };
+		DB51D734142E4DE1009C0A1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB51D732142E4DE1009C0A1C /* InfoPlist.strings */; };
+		DB51D737142E4DE1009C0A1C /* CoreTableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DB51D736142E4DE1009C0A1C /* CoreTableTests.m */; };
+		DB51D740142E4E43009C0A1C /* CTTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = DB51D73E142E4E43009C0A1C /* CTTableView.h */; };
+		DB51D741142E4E43009C0A1C /* CTTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB51D73F142E4E43009C0A1C /* CTTableView.m */; };
+		DB51D769142E4EEF009C0A1C /* CTTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = DB51D767142E4EEF009C0A1C /* CTTableViewDataSource.h */; };
+		DB51D76A142E4EEF009C0A1C /* CTTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DB51D768142E4EEF009C0A1C /* CTTableViewDataSource.m */; };
+		DB51D76C142E4F13009C0A1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51D76B142E4F13009C0A1C /* UIKit.framework */; };
+		DB51D76E142E4F1B009C0A1C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB51D76D142E4F1B009C0A1C /* CoreData.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DB51D72C142E4DE1009C0A1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB51D70B142E4CF7009C0A1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB51D715142E4DE1009C0A1C;
+			remoteInfo = CoreTable;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DB51D716142E4DE1009C0A1C /* libCoreTable.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreTable.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB51D719142E4DE1009C0A1C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DB51D71D142E4DE1009C0A1C /* CoreTable-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreTable-Prefix.pch"; sourceTree = "<group>"; };
+		DB51D726142E4DE1009C0A1C /* CoreTableTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTableTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB51D727142E4DE1009C0A1C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		DB51D729142E4DE1009C0A1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		DB51D731142E4DE1009C0A1C /* CoreTableTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreTableTests-Info.plist"; sourceTree = "<group>"; };
+		DB51D733142E4DE1009C0A1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DB51D735142E4DE1009C0A1C /* CoreTableTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreTableTests.h; sourceTree = "<group>"; };
+		DB51D736142E4DE1009C0A1C /* CoreTableTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreTableTests.m; sourceTree = "<group>"; };
+		DB51D73E142E4E43009C0A1C /* CTTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTableView.h; sourceTree = "<group>"; };
+		DB51D73F142E4E43009C0A1C /* CTTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTableView.m; sourceTree = "<group>"; };
+		DB51D767142E4EEF009C0A1C /* CTTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTTableViewDataSource.h; sourceTree = "<group>"; };
+		DB51D768142E4EEF009C0A1C /* CTTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTTableViewDataSource.m; sourceTree = "<group>"; };
+		DB51D76B142E4F13009C0A1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		DB51D76D142E4F1B009C0A1C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB51D713142E4DE1009C0A1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB51D76E142E4F1B009C0A1C /* CoreData.framework in Frameworks */,
+				DB51D76C142E4F13009C0A1C /* UIKit.framework in Frameworks */,
+				DB51D71A142E4DE1009C0A1C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB51D722142E4DE1009C0A1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB51D728142E4DE1009C0A1C /* SenTestingKit.framework in Frameworks */,
+				DB51D72A142E4DE1009C0A1C /* UIKit.framework in Frameworks */,
+				DB51D72B142E4DE1009C0A1C /* Foundation.framework in Frameworks */,
+				DB51D72E142E4DE1009C0A1C /* libCoreTable.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
 		DB51D709142E4CF7009C0A1C = {
 			isa = PBXGroup;
 			children = (
+				DB51D71B142E4DE1009C0A1C /* CoreTable */,
+				DB51D72F142E4DE1009C0A1C /* CoreTableTests */,
+				DB51D718142E4DE1009C0A1C /* Frameworks */,
+				DB51D717142E4DE1009C0A1C /* Products */,
 			);
 			sourceTree = "<group>";
 		};
+		DB51D717142E4DE1009C0A1C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB51D716142E4DE1009C0A1C /* libCoreTable.a */,
+				DB51D726142E4DE1009C0A1C /* CoreTableTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB51D718142E4DE1009C0A1C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB51D76D142E4F1B009C0A1C /* CoreData.framework */,
+				DB51D76B142E4F13009C0A1C /* UIKit.framework */,
+				DB51D719142E4DE1009C0A1C /* Foundation.framework */,
+				DB51D727142E4DE1009C0A1C /* SenTestingKit.framework */,
+				DB51D729142E4DE1009C0A1C /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB51D71B142E4DE1009C0A1C /* CoreTable */ = {
+			isa = PBXGroup;
+			children = (
+				DB51D73E142E4E43009C0A1C /* CTTableView.h */,
+				DB51D73F142E4E43009C0A1C /* CTTableView.m */,
+				DB51D767142E4EEF009C0A1C /* CTTableViewDataSource.h */,
+				DB51D768142E4EEF009C0A1C /* CTTableViewDataSource.m */,
+				DB51D71C142E4DE1009C0A1C /* Supporting Files */,
+			);
+			path = CoreTable;
+			sourceTree = "<group>";
+		};
+		DB51D71C142E4DE1009C0A1C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB51D71D142E4DE1009C0A1C /* CoreTable-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DB51D72F142E4DE1009C0A1C /* CoreTableTests */ = {
+			isa = PBXGroup;
+			children = (
+				DB51D735142E4DE1009C0A1C /* CoreTableTests.h */,
+				DB51D736142E4DE1009C0A1C /* CoreTableTests.m */,
+				DB51D730142E4DE1009C0A1C /* Supporting Files */,
+			);
+			path = CoreTableTests;
+			sourceTree = "<group>";
+		};
+		DB51D730142E4DE1009C0A1C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB51D731142E4DE1009C0A1C /* CoreTableTests-Info.plist */,
+				DB51D732142E4DE1009C0A1C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DB51D714142E4DE1009C0A1C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB51D740142E4E43009C0A1C /* CTTableView.h in Headers */,
+				DB51D769142E4EEF009C0A1C /* CTTableViewDataSource.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DB51D715142E4DE1009C0A1C /* CoreTable */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB51D738142E4DE1009C0A1C /* Build configuration list for PBXNativeTarget "CoreTable" */;
+			buildPhases = (
+				DB51D712142E4DE1009C0A1C /* Sources */,
+				DB51D713142E4DE1009C0A1C /* Frameworks */,
+				DB51D714142E4DE1009C0A1C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreTable;
+			productName = CoreTable;
+			productReference = DB51D716142E4DE1009C0A1C /* libCoreTable.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		DB51D725142E4DE1009C0A1C /* CoreTableTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB51D73B142E4DE1009C0A1C /* Build configuration list for PBXNativeTarget "CoreTableTests" */;
+			buildPhases = (
+				DB51D721142E4DE1009C0A1C /* Sources */,
+				DB51D722142E4DE1009C0A1C /* Frameworks */,
+				DB51D723142E4DE1009C0A1C /* Resources */,
+				DB51D724142E4DE1009C0A1C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB51D72D142E4DE1009C0A1C /* PBXTargetDependency */,
+			);
+			name = CoreTableTests;
+			productName = CoreTableTests;
+			productReference = DB51D726142E4DE1009C0A1C /* CoreTableTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		DB51D70B142E4CF7009C0A1C /* Project object */ = {
@@ -29,12 +213,81 @@
 				en,
 			);
 			mainGroup = DB51D709142E4CF7009C0A1C;
+			productRefGroup = DB51D717142E4DE1009C0A1C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				DB51D715142E4DE1009C0A1C /* CoreTable */,
+				DB51D725142E4DE1009C0A1C /* CoreTableTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DB51D723142E4DE1009C0A1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB51D734142E4DE1009C0A1C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DB51D724142E4DE1009C0A1C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB51D712142E4DE1009C0A1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB51D741142E4E43009C0A1C /* CTTableView.m in Sources */,
+				DB51D76A142E4EEF009C0A1C /* CTTableViewDataSource.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB51D721142E4DE1009C0A1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB51D737142E4DE1009C0A1C /* CoreTableTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DB51D72D142E4DE1009C0A1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB51D715142E4DE1009C0A1C /* CoreTable */;
+			targetProxy = DB51D72C142E4DE1009C0A1C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DB51D732142E4DE1009C0A1C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB51D733142E4DE1009C0A1C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DB51D710142E4CF7009C0A1C /* Debug */ = {
@@ -49,6 +302,116 @@
 			};
 			name = Release;
 		};
+		DB51D739142E4DE1009C0A1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/CoreTable.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreTable/CoreTable-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DB51D73A142E4DE1009C0A1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/CoreTable.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreTable/CoreTable-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DB51D73C142E4DE1009C0A1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreTable/CoreTable-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "CoreTableTests/CoreTableTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		DB51D73D142E4DE1009C0A1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreTable/CoreTable-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "CoreTableTests/CoreTableTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -57,6 +420,24 @@
 			buildConfigurations = (
 				DB51D710142E4CF7009C0A1C /* Debug */,
 				DB51D711142E4CF7009C0A1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB51D738142E4DE1009C0A1C /* Build configuration list for PBXNativeTarget "CoreTable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB51D739142E4DE1009C0A1C /* Debug */,
+				DB51D73A142E4DE1009C0A1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB51D73B142E4DE1009C0A1C /* Build configuration list for PBXNativeTarget "CoreTableTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB51D73C142E4DE1009C0A1C /* Debug */,
+				DB51D73D142E4DE1009C0A1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
