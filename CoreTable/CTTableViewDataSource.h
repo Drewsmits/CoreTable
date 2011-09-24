@@ -20,25 +20,44 @@
  */
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
+@optional
+
+- (void)clearCache;
+
 @end
 
 @interface CTTableViewDataSource : NSObject <CTTableViewDataSource, NSFetchedResultsControllerDelegate> {
 @private
-    CTTableView *tableView;
+    NSManagedObjectContext *managedObjectContext;
     NSFetchedResultsController *fetchedResultsController;
+    
+    UITableView *tableView;
     
     NSString *entityName;
     NSPredicate *searchPredicate;
     NSArray *sortDiscriptors;
+    NSString *cacheName;
 }
 
-- (id)initWithCTTableView:(CTTableView *)aTableView;
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)context;
 
-@property (nonatomic, assign) CTTableView *tableView;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
+
+@property (nonatomic, assign) UITableView *tableView;
 
 @property (nonatomic, retain) NSString *entityName;
 @property (nonatomic, retain) NSPredicate *predicate;
 @property (nonatomic, retain) NSArray *sortDiscriptors;
+@property (nonatomic, assign) NSInteger batchSize;
+
+/**
+ * The name of the cache the fetched results controller will use. If set, the controller
+ * will use the cache to avoid the need to repeat work setting up sections and ordering fetched results.
+ * The cache is maintained across launches of your application.  You can purge a cache with clearCache.
+ * 
+ * @see clearCache
+ */
+@property (nonatomic, copy) NSString *cacheName;
 
 @end

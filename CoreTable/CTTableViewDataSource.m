@@ -10,9 +10,12 @@
 
 @implementation CTTableViewDataSource
 
-@synthesize tableView, entityName, predicate, sortDiscriptors;
+@synthesize managedObjectContext, tableView, entityName, predicate, 
+            sortDiscriptors, batchSize, cacheName;
 
 - (void)dealloc {
+    
+    [managedObjectContext release], self.managedObjectContext = nil;
     
     fetchedResultsController.delegate = nil;
     [fetchedResultsController release];
@@ -20,6 +23,7 @@
     [entityName release], self.entityName = nil;
     [predicate release], self.predicate = nil;
     [sortDiscriptors release], self.sortDiscriptors = nil;
+    [cacheName release], self.cacheName = nil;
     
     [super dealloc];
 }
@@ -32,12 +36,14 @@
     return self;
 }
 
-- (id)initWithCTTableView:(CTTableView *)aTableView {
-    if (self = [super init]) {
-        self.tableView = aTableView;
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)context {
+    if (self = [self init]) {
+        self.managedObjectContext = context;
     }
     return self;
 }
+
+#pragma mark - CTTableViewDataSource
 
 - (void)performFetch {
     NSError *error;
@@ -48,10 +54,21 @@
 	}
 }
 
-#pragma mark - 
-#pragma mark UITableViewDataSource
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+}
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (void)clearCache {
+    NSAssert(self.cacheName, @"Clearing the cache with no cache name will delete all NSFetchedResultsController caches!");
+    [NSFetchedResultsController deleteCacheWithName:self.cacheName];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView {
+    // This gets hit first, grab the table here
+    self.tableView = aTableView;
+    
     return [[self.fetchedResultsController sections] count];
 }
 
@@ -61,8 +78,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:[[self.object class] tableViewCellReuseIdentifier]];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[[self.object class] tableViewCellReuseIdentifier]];
     
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
@@ -74,12 +90,74 @@
     return cell;
 }
 
-- (id)fetchedObjectAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.fetchedResultsController objectAtIndexPath:indexPath];
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section { 
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo name];
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {    
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return [self.fetchedResultsController sectionIndexTitles];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                          withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                          withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+        
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath]
+                    atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
 }
 
 #pragma mark -
@@ -88,23 +166,27 @@
 - (NSFetchedResultsController *)fetchedResultsController {
     if (fetchedResultsController) return [[fetchedResultsController retain] autorelease];
     
+    NSAssert((self.entityName || self.predicate), @"CTTableViewDataSource must at least have an entityName or a predicate!");
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    if (self.entityName) {
+        NSEntityDescription *entity = [NSEntityDescription entityForName:self.entityName
+                                                  inManagedObjectContext:self.managedObjectContext];
         
-    NSEntityDescription *entity = [NSEntityDescription entityForName:self.entityName
-                                              inManagedObjectContext:self.tableView.managedObjectContext];
-    
-    [fetchRequest setEntity:entity];
-    
+        [fetchRequest setEntity:entity];
+    }
+
     [fetchRequest setPredicate:self.predicate];
     
     [fetchRequest setSortDescriptors:self.sortDiscriptors];
     
-    [fetchRequest setFetchBatchSize:[self fetchRequestBatchSize]];
+    [fetchRequest setFetchBatchSize:self.batchSize];
     
     fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
-                                                                   managedObjectContext:self.tableView.managedObjectContext
+                                                                   managedObjectContext:self.managedObjectContext
                                                                      sectionNameKeyPath:nil 
-                                                                              cacheName:[self fetchedResultsControllerCacheName]];
+                                                                              cacheName:self.cacheName];
     
     fetchedResultsController.delegate = self;
     

@@ -7,23 +7,16 @@
 //
 
 
-@interface CTTableView : UITableView {
-@private
-    NSManagedObjectContext *managedObjectContext;
-}
+@interface CTTableView : UITableView 
 
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+- (void)setupWithManagedObjectContext:(NSManagedObjectContext *)context andCacheName:(NSString *)cacheName;
 
-- (void)setupWithManagedObjectContext:(NSManagedObjectContext *)context;
+- (void)showAllEntitiesNamed:(NSString *)entityName;
 
-- (void)showAllObjectsNamed:(NSString *)objectName;
+- (void)showAllEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate;
 
-- (void)showAllObjectsMatchingPredicate:(NSPredicate *)predicate;
+- (void)showAllEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors;
 
-- (void)showAllObjectsNamed:(NSString *)objectName matchingPredicate:(NSPredicate *)predicate;
-
-- (void)showAllObjectsNamed:(NSString *)objectName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors;
-
-- (void)showAllObjectsNamed:(NSString *)objectName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors batchSize:(NSInteger)batchSize;
+- (void)showAllEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors batchSize:(NSInteger)batchSize;
 
 @end

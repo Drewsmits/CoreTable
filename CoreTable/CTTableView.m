@@ -11,13 +11,10 @@
 
 @implementation CTTableView
 
-@synthesize managedObjectContext;
 
-- (void)dealloc {
-    [managedObjectContext release], self.managedObjectContext = nil;
-    
-    [super dealloc];
-}
+//- (void)dealloc {    
+//    [super dealloc];
+//}
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -38,33 +35,26 @@
 
 #pragma mark - Public API
 
-- (void)setupWithManagedObjectContext:(NSManagedObjectContext *)context {
+- (void)setupWithManagedObjectContext:(NSManagedObjectContext *)context andCacheName:(NSString *)cacheName {
+    CTTableViewDataSource *aDataSource = [[[CTTableViewDataSource alloc] initWithManagedObjectContext:context] autorelease];
+    aDataSource.cacheName = cacheName;
     
-    self.managedObjectContext = context;
-    
-    CTTableViewDataSource *aDataSource = [[[CTTableViewDataSource alloc] initWithCTTableView:self] autorelease];
-        
     self.dataSource = [aDataSource retain];
 }
 
-- (void)showAllObjectsNamed:(NSString *)objectName {
+- (void)showAllEntitiesNamed:(NSString *)entityName {
     
 }
 
-- (void)showAllObjectsMatchingPredicate:(NSPredicate *)predicate {
+- (void)showAllEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate {
     
 }
 
-- (void)showAllObjectsNamed:(NSString *)objectName matchingPredicate:(NSPredicate *)predicate {
+- (void)showAllEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors {
     
 }
 
-- (void)showAllObjectsNamed:(NSString *)objectName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors {
-    
+- (void)showAllEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors batchSize:(NSInteger)batchSize {
+        
 }
-
-- (void)showAllObjectsNamed:(NSString *)objectName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors batchSize:(NSInteger)batchSize {
-    
-}
-
 @end
