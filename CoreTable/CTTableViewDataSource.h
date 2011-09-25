@@ -11,18 +11,33 @@
 @protocol CTTableViewDataSource <UITableViewDataSource>
 
 /**
- Perform the fetch with the fetchedResultsController
+ * Perform the fetch with the fetchedResultsController
  */
 - (void)performFetch;
 
 /**
- Configures the cell with the object at that index path
+ * Reload the results with a new start and end index
+ */
+- (void)reloadStartingAtIndex:(NSUInteger)startIndex limit:(NSUInteger)limit;
+
+/**
+ * Configures the cell with the object at that index path
  */
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
-@optional
+/**
+ * Clears the cache named cacheName.  Will not clear if cacheName is nil.
+ *
+ * @see cacheName
+ */
+- (BOOL)clearCache;
 
-- (void)clearCache;
+/**
+ * Clears all NSFetchedResultsController caches.
+ *
+ * @see clearCache
+ */
+- (void)clearAllCaches;
 
 @end
 
@@ -49,7 +64,11 @@
 @property (nonatomic, retain) NSString *entityName;
 @property (nonatomic, retain) NSPredicate *predicate;
 @property (nonatomic, retain) NSArray *sortDiscriptors;
-@property (nonatomic, assign) NSInteger batchSize;
+
+// Fetch request
+@property (nonatomic, assign) NSUInteger fetchBatchSize;
+@property (nonatomic, assign) NSUInteger fetchStartIndex;
+@property (nonatomic, assign) NSUInteger fetchLimit;
 
 /**
  * The name of the cache the fetched results controller will use. If set, the controller
@@ -57,6 +76,7 @@
  * The cache is maintained across launches of your application.  You can purge a cache with clearCache.
  * 
  * @see clearCache
+ * @see clearAllCaches
  */
 @property (nonatomic, copy) NSString *cacheName;
 

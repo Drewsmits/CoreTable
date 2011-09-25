@@ -11,7 +11,9 @@
 @implementation CTTableViewDataSource
 
 @synthesize managedObjectContext, tableView, entityName, predicate, 
-            sortDiscriptors, batchSize, cacheName;
+            sortDiscriptors, cacheName;
+
+@synthesize fetchBatchSize, fetchStartIndex, fetchLimit;
 
 - (void)dealloc {
     
@@ -54,13 +56,36 @@
 	}
 }
 
+- (void)reloadStartingAtIndex:(NSUInteger)startIndex withFetchLimit:(NSUInteger)limit {
+    
+    NSAssert(startIndex != NSNotFound, @"");    
+    
+    [self clearCache];
+    
+    [self.fetchedResultsController.fetchRequest setFetchOffset:startIndex];
+    
+    if (limit != NSNotFound) {
+        [self.fetchedResultsController.fetchRequest setFetchLimit:limit];
+    }
+        
+    [self performFetch];
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
 }
 
-- (void)clearCache {
-    NSAssert(self.cacheName, @"Clearing the cache with no cache name will delete all NSFetchedResultsController caches!");
-    [NSFetchedResultsController deleteCacheWithName:self.cacheName];
+- (BOOL)clearCache {
+    if (self.cacheName) {
+        [NSFetchedResultsController deleteCacheWithName:self.cacheName];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (void)clearAllCaches {
+    [NSFetchedResultsController deleteCacheWithName:nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -77,12 +102,12 @@
     return [sectionInfo numberOfObjects];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[[self.object class] tableViewCellReuseIdentifier]];
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:@"CellReuseIdentifier"];
     
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-                                       reuseIdentifier:[[self.object class] tableViewCellReuseIdentifier]] autorelease];
+                                       reuseIdentifier:@"CellReuseIdentifier"] autorelease];
     }
     
     [self configureCell:cell atIndexPath:indexPath];
@@ -167,6 +192,7 @@
     if (fetchedResultsController) return [[fetchedResultsController retain] autorelease];
     
     NSAssert((self.entityName || self.predicate), @"CTTableViewDataSource must at least have an entityName or a predicate!");
+    NSAssert(self.managedObjectContext, @"Nil managedObjectContext on CTTableViewDataSource!");
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
@@ -181,7 +207,18 @@
     
     [fetchRequest setSortDescriptors:self.sortDiscriptors];
     
-    [fetchRequest setFetchBatchSize:self.batchSize];
+    [fetchRequest setFetchBatchSize:self.fetchBatchSize];
+    
+    // Play it safe
+    if (self.fetchStartIndex != NSNotFound) {
+        [fetchRequest setFetchOffset:self.fetchStartIndex];
+    } else {
+        [fetchRequest setFetchOffset:0];
+    }
+    
+    if (self.fetchLimit != NSNotFound) {
+        [fetchRequest setFetchLimit:self.fetchLimit];
+    }
     
     fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
                                                                    managedObjectContext:self.managedObjectContext

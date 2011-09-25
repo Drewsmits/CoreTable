@@ -9,14 +9,24 @@
 
 @interface CTTableView : UITableView 
 
+// Setup
+
+- (void)setupWithManagedObjectContext:(NSManagedObjectContext *)context;
+
 - (void)setupWithManagedObjectContext:(NSManagedObjectContext *)context andCacheName:(NSString *)cacheName;
 
-- (void)showAllEntitiesNamed:(NSString *)entityName;
+// Show
 
-- (void)showAllEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate;
+- (void)showEntitiesNamed:(NSString *)entityName;
 
-- (void)showAllEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors;
+- (void)showEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate;
 
-- (void)showAllEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors batchSize:(NSInteger)batchSize;
+- (void)showEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors;
+
+- (void)showEntitiesNamed:(NSString *)entityName matchingPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDiscriptors batchSize:(NSUInteger)batchSize startingAtIndex:(NSUInteger)startingIndex endingAtIndex:(NSUInteger)endingIndex;
+
+// Reload
+
+- (void)reloadStartingAtIndex:(NSUInteger)index withFetchLimit:(NSUInteger)limit;
 
 @end
